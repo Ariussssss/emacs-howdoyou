@@ -491,5 +491,15 @@ Pop up *How Do You* buffer to show the answer."
   (interactive)
   (howdoyou-n-link (- howdoyou--current-link-index)))
 
+;;;###autoload
+(defun howdoyou-region (start end)
+  "Search region for answer."
+  (interactive "r")
+  (if (use-region-p)
+      (let ((regionp (buffer-substring start end)))
+	(progn 
+	  (howdoyou--update-history regionp)
+	  (howdoyou-promise-answer regionp)))))
+
 (provide 'howdoyou)
 ;;; howdoyou.el ends here
